@@ -49,7 +49,7 @@ mongoose
         // useCreateIndex: true
     })
     .then((result) => {
-        app.listen(PORT, () => {
+        app.listen(5000, () => {
             console.log(`app listening: ${PORT}`)
         })
     }).catch((err) => {
