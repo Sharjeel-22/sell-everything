@@ -4,8 +4,12 @@ import bodyparser from 'body-parser';
 import UserRouter from './routes/UserRouter';
 import UserResourcesRouter from './routes/Resources';
 import path from 'path';
+import dotenv from "dotenv"
+
 // import cors from "cors"
 const cors = require('cors');
+
+dotenv.config();
 
 const app = express();
 // Origins Allow
@@ -39,7 +43,7 @@ app.use('**', (req, res) => {
     })
 })
 
-const PORT = process.env.PORT;
+const port = process.env.PORT || 3000;
 const MONGODB_URL = "mongodb://user:user@netlands-shard-00-00.ba8lw.mongodb.net:27017,netlands-shard-00-01.ba8lw.mongodb.net:27017,netlands-shard-00-02.ba8lw.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-xyf3mq-shard-0&authSource=admin&retryWrites=true&w=majority"
 mongoose
     .connect(MONGODB_URL, {
@@ -49,9 +53,9 @@ mongoose
         // useCreateIndex: true
     })
     .then((result) => {
-        app.listen(3001, '0.0.0.0', () => {
-            console.log("Server is running.");
-          });
+        app.listen(port, () => {
+          console.log(`Server running on port ${port}`);
+        });
     }).catch((err) => {
         console.log(err)
     })
