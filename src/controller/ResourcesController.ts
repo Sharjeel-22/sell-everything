@@ -25,7 +25,7 @@ class ResourcesController {
         userId: data.userId,
         title: data.title,
         description: data.description,
-        imageURL: "http://localhost:5000/uploads/" + req.file?.filename,
+        imageURL: "https://sell-everything.herokuapp.com/uploads/" + req.file?.filename,
       });
       if (!resource) {
         return res.status(400).json({
