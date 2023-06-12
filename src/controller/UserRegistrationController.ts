@@ -28,7 +28,7 @@ class UserRegistrationController {
         firstName: tempData.firstName,
         lastName: tempData.lastName,
         email: tempData.email,
-        password: tempData.passowrd,
+        password: tempData.password,
         imageURL: "https://sell-everything.herokuapp.com/uploads/" + req.file?.filename,
         role: "user",
       });
