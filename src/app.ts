@@ -43,7 +43,7 @@ app.use('**', (req, res) => {
     })
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const MONGODB_URL = "mongodb://user:user@netlands-shard-00-00.ba8lw.mongodb.net:27017,netlands-shard-00-01.ba8lw.mongodb.net:27017,netlands-shard-00-02.ba8lw.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-xyf3mq-shard-0&authSource=admin&retryWrites=true&w=majority"
 mongoose
     .connect(MONGODB_URL, {
