@@ -10,7 +10,7 @@
     "sourceMap": true,
     "types": [
       "node", "jsonwebtoken",
-      "multer","dotenv"
+      "multer","dotenv","jest"
     ]
   },
   "include": ["src/**/*"],

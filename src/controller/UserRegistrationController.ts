@@ -202,6 +202,15 @@ class UserRegistrationController {
         .json({ message: "Server Error", code: 500, error: e });
     }
   };
+  public tempFun (value:string)  {
+    try{
+      let name = value;
+      return name;
+
+    }catch(e){
+      console.log("==========Error=============",e);
+    }
+  }
 }
 const userRegistrationController = new UserRegistrationController();
 
