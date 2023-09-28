@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import UserRegistrationModel from "../model/UserRegistration";
 import jwt from "jsonwebtoken";
-
+import nodemailer from "nodemailer";
 interface User {
   id?: string;
   firstName: string;
@@ -39,10 +39,27 @@ class UserRegistrationController {
           results: {},
         });
       }
+
+      // let transporter = nodemailer.createTransport({
+      //   service: "gmail",
+      //   auth: {
+      //     user: "pcraboot55441@gmail.com",
+      //     pass: "Sharjeel@0080",
+      //   },
+      // });
+      // await transporter.sendMail({
+      //   from: '"Fred Foo 👻" <pcraboot5541@gmail.com>', // sender address
+      //   to: "pcraboot55441@gmail.com", // list of receivers
+      //   subject: "Congrats ✔", // Subject line
+      //   text: "Your Account Created Successfully", // plain text body
+      //   html: "<b>Your Account Created Successfully</b>", // html body
+      // });
+      // console.log("Email Send Successfully");
+
       return res.status(200).json({
         message: "User Register Successfully",
         hasError: false,
-        user: user
+        user: user,
       });
     } catch (e) {
       console.log("========User Registration Error============", e);
@@ -80,7 +97,7 @@ class UserRegistrationController {
       return res.status(200).json({
         message: "User Login Successfully...",
         hasError: false,
-        user: user
+        user: user,
       });
     } catch (e) {
       console.log("========User Loging Error============", e);
@@ -93,8 +110,11 @@ class UserRegistrationController {
     try {
       let { id } = req.params;
       let data = req.body;
-      console.log("Check :: ",data)
-      let user: any = await UserRegistrationModel.findById({ _id: id ,status:"ACTIVE"});
+      console.log("Check :: ", data);
+      let user: any = await UserRegistrationModel.findById({
+        _id: id,
+        status: "ACTIVE",
+      });
       if (data.email) {
         user.email = data.email;
         await user.save();
@@ -103,7 +123,7 @@ class UserRegistrationController {
         user.password = data.password;
         await user.save();
       }
-      if(data.role){
+      if (data.role) {
         user.role = data.role;
       }
       if (!user) {
@@ -190,7 +210,7 @@ class UserRegistrationController {
           hasError: true,
         });
       }
-      console.log("Your Delete Successfully.....",user._id);
+      console.log("Your Delete Successfully.....", user._id);
       return res.status(200).json({
         message: "User Deleted Successfully.....",
         hasError: false,
@@ -202,13 +222,12 @@ class UserRegistrationController {
         .json({ message: "Server Error", code: 500, error: e });
     }
   };
-  public tempFun (value:string)  {
-    try{
+  public tempFun(value: string) {
+    try {
       let name = value;
       return name;
-
-    }catch(e){
-      console.log("==========Error=============",e);
+    } catch (e) {
+      console.log("==========Error=============", e);
     }
   }
 }

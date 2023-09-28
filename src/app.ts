@@ -5,6 +5,7 @@ import UserRouter from './routes/UserRouter';
 import UserResourcesRouter from './routes/Resources';
 import path from 'path';
 import dotenv from "dotenv"
+import auth from './auth/Auth';
 
 // import cors from "cors"
 const cors = require('cors');
@@ -33,7 +34,7 @@ app.use(bodyparser.urlencoded({ extended: true }))
 app.use("/uploads", express.static(path.join(__dirname, '../uploads')));
 
 app.use('/api', UserRouter);
-app.use('/api', UserResourcesRouter);
+app.use('/api/resource',auth.verifyToken, UserResourcesRouter);
 
 
 app.use('**', (req, res) => {

@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import userResourcesController from '../controller/ResourcesController';
 import multerHelper from '../helper/MulterHelper';
-import auth from '../auth/Auth';
 
 
 class UserResourceRouter {
@@ -12,14 +11,14 @@ class UserResourceRouter {
     }
 
     routesGroup = () => {
-        this.router.post('/resource', multerHelper.uploads.single('imageURL'),auth.verifyToken,userResourcesController.postUserResources)
-        this.router.post('/resource/comment/',auth.verifyToken,userResourcesController.postUserCommentsOnResources);
-        this.router.put('/resource/:id',auth.verifyToken,userResourcesController.updateUserResources);
-        this.router.put('/resource/comment/:id',auth.verifyToken,userResourcesController.UpdateUserCommentsOnResources)
-        this.router.get('/resources',auth.verifyToken, userResourcesController.getAllResources);
-        this.router.get('/resource/:id',auth.verifyToken,userResourcesController.findOne);
-        this.router.delete('/resource/:id',auth.verifyToken,userResourcesController.deleteUserResource);
-        this.router.put('/resource/comment/update/:id',auth.verifyToken,userResourcesController.deleteUserCommentsOnResources);
+        this.router.post('/', multerHelper.uploads.single('imageURL'),userResourcesController.postUserResources)
+        this.router.post('/comment/',userResourcesController.postUserCommentsOnResources);
+        this.router.put('/:id',userResourcesController.updateUserResources);
+        this.router.put('/comment/:id',userResourcesController.UpdateUserCommentsOnResources)
+        this.router.get('/', userResourcesController.getAllResources);
+        this.router.get('/:id',userResourcesController.findOne);
+        this.router.delete('/:id',userResourcesController.deleteUserResource);
+        this.router.put('/comment/update/:id',userResourcesController.deleteUserCommentsOnResources);
     }
 }
 
